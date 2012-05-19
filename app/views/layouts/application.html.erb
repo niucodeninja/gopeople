@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gopeople</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>Gopeople</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+	<%- flash.each do |name, msg| -%>
+	<%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+	<%- end -%>
+	<p><%= link_to 'Home', root_path %></p>
+
+	<% if user_signed_in? -%>
+	<div>
+		<%= current_user.email %> |
+		<%= link_to 'My info', edit_user_registration_path %> |
+		<%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+	</div>
+	<% end -%>
+
+	<%= yield %>
 
 </body>
 </html>

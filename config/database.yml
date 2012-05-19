@@ -17,14 +17,10 @@ development:
   encoding: unicode
   database: gopeople_development
   pool: 5
-  username: gopeople
-  password:
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  #host: localhost
-  #port: 5432
+  username: postgres
+  password: 1q2w3e4r5t
+  host: localhost
+  port: 5431
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -43,8 +39,10 @@ test:
   encoding: unicode
   database: gopeople_test
   pool: 5
-  username: gopeople
-  password:
+  username: postgres
+  password: 1q2w3e4r5t
+  host: localhost
+  port: 5431
 
 production:
   adapter: postgresql
