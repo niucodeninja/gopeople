@@ -1,9 +1,17 @@
 Gopeople::Application.routes.draw do
-  get "registrations/create"
 
-  get "friendships/create"
+  devise_for :users, :path => 'people', :path_names => { :sign_in => 'signin', :sign_out => 'signout', :password => 'secret', :confirmation => 'confirmation', :unlock => 'unblock', :registration => 'account', :sign_up => 'signup' } do
+  end
+  resources :users, :path => 'people', :only => [:search] do
+    get 'search', :on => :collection, :template => 'users/searchs/search'
+    resources :friends, :controller => :friendships, :only => [:index] do
+    end
+  end
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  resources :friends, :controller => :friendships, :only => [:requests, :invites] do
+    get 'requests', :on => :collection
+    get 'invites', :on => :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,1 +1,8 @@
 <h1>¡Hello!</h1>
+
+<% if user_signed_in? -%>
+<div>
+	<%= link_to 'Invite user', new_user_invitation_path %>
+</div>
+<%= link_to 'Friends', user_friends_path(current_user) %>
+<% end %>
